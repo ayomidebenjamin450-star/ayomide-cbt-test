@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ayomide CBT</title>
+</head>
+<body>
+
+<h1>Ayomide CBT</h1>
+
+<div id="quiz"></div>
+<button onclick="submitTest()">Submit</button>
+
+<p id="result"></p>
+
+<script>
+const questions = [
+  {
+    question: "What is 5 + 3?",
+    options: ["6", "7", "8", "9"],
+    answer: "8"
+  },
+  {
+    question: "Nigeria capital is?",
+    options: ["Lagos", "Abuja", "Kano", "Enugu"],
+    answer: "Abuja"
+  }
+];
+
+const quiz = document.getElementById("quiz");
+
+questions.forEach((q, i) => {
+  let html = `<p>${q.question}</p>`;
+  q.options.forEach(opt => {
+    html += `<input type="radio" name="q${i}" value="${opt}">${opt}<br>`;
+  });
+  quiz.innerHTML += html;
+});
+
+function submitTest() {
+  let score = 0;
+
+  questions.forEach((q, i) => {
+    let ans = document.querySelector(`input[name="q${i}"]:checked`);
+    if (ans && ans.value === q.answer) score++;
+  });
+
+  document.getElementById("result").innerText =
+    "Score: " + score + "/" + questions.length;
+}
+</script>
+
+</body>
+</html>
